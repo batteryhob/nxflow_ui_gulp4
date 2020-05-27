@@ -1,0 +1,1745 @@
+
+$green-color: #00a950;
+$red-color: #f53794;
+$purple-color: #8549ba;
+$blue-color: #537bc4;
+$yellow-color: rgb(255, 205, 86);
+
+#project {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    
+    button {
+        display: inline-block;
+        width: 70px;
+        height: 25px;
+        text-align: center;
+        border: none;
+        background: transparent;
+        border-radius: 12.5px;
+        &.filter {
+            &:hover {
+                background: #ccc;
+            }
+            &.on {
+                background: #ccc;
+            }
+        }
+        &.cancle {
+            &:hover {
+                background: #f1f1f1;
+            }
+        }
+        &.download {
+            color: $blue-color;
+            &:hover {
+                background: #f1f1f1;
+            }
+        }
+        &.comment {
+            color: $blue-color;
+            &:hover {
+                background: #f1f1f1;
+            }
+        }
+        &.show {
+            color: red;
+            &:hover {
+                background: #f1f1f1;
+            }
+        }
+        &.delete {
+            color: $blue-color;
+            &:hover {
+                background: #f1f1f1;
+            }
+        }
+        &.menu {
+            width: 25px;
+            height: 25px;
+            color: #FFF;
+            &:hover {
+                background: #FFF;
+                color: #041e42;
+            }
+        }
+    }
+
+    #popup {
+        position: fixed;
+        z-index: 9998;
+        top: 100vh;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .5);
+        display: table;
+        transition: all .3s ease;
+
+        &.on {
+            top: 0vh;
+            display: table;
+        }
+
+        #wrapper {
+            display: table-cell;
+            vertical-align: middle;            
+            #container {
+                position: relative;
+                width: 400px;
+                margin: 0px auto;
+                background-color: #FFF;
+                box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);
+                .header {
+                    font-size: 14px;
+                    padding: 20px 20px;
+                    background-color: rgb(96, 125, 139);
+                    color: #FFF;
+                }
+                .body {
+                    position: relative;
+                    .value {
+                        position: relative;
+                        textarea {
+                            width: 394px;
+                            padding-top: 20px;
+                            padding-bottom: 20px;
+                            min-height: 20rem;                            
+                            font-size: 1rem;
+                            line-height: 1.2;
+                            background-color: black;
+                            color: #FFF;
+                            resize: none;
+                            text-decoration: none;
+                            &:focus {
+                                outline:0;
+                            }
+                        }
+                    }
+                }
+                .desc {
+                    background-color: rgb(250, 250, 250);
+                    .text {
+                        padding: 20px 20px;
+                    }
+                }
+                .footer {       
+                    text-align: right;      
+                    padding: 20px 20px;        
+                    border-top: 1px solid #ccc;
+                    background-color: rgb(250, 250, 250);
+                }     
+            }            
+        }
+    }
+
+    #popup2 {
+        @extend #popup;
+
+        #wrapper {            
+            #container {
+                position: relative;
+                width: 600px;
+                margin: 0px auto;
+                background-color: #FFF;
+                box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);    
+                .header {
+                    font-size: 14px;
+                    padding: 20px 20px;
+                    background-color: rgb(96, 125, 139);
+                    color: #FFF;
+                }
+                .body {
+                    position: relative;
+                    .value {
+                        position: relative;
+                        textarea {
+                            width: 594px;
+                            padding-top: 20px;
+                            padding-bottom: 20px;
+                            min-height: 20rem;                            
+                            font-size: 1rem;
+                            line-height: 1.2;
+                            background-color: black;
+                            color: #FFF;
+                            resize: none;
+                            text-decoration: none;
+                            &:focus {
+                                outline:0;
+                            }
+                        }
+                    }
+                }
+                .desc {
+                    background-color: rgb(250, 250, 250);
+                    .text {
+                        padding: 20px 20px;
+                    }
+                }   
+            }            
+        }
+    }
+
+    #inference {
+        @extend #popup;
+
+        #wrapper {           
+            #container {
+                position: relative;
+                width: 800px;
+                margin: 0px auto;
+                background-color: #FFF;
+                box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);    
+                .header {
+                    font-size: 14px;
+                    padding: 20px 20px;
+                    background-color: rgb(96, 125, 139);
+                    color: #FFF;
+                    .refresh {
+                        position: absolute;
+                        top: 20px;
+                        right: 20px;
+                        button {
+                            height: 25px;
+                            border: none;
+                            background: transparent;
+                            border-radius: 12.5px;
+                            color: #FFF;
+                            &:hover {
+                                background: #ccc;
+                            }
+                            &.on {
+                                background: #ccc;
+                            }
+                        }
+                    }
+                }
+                .body {
+                    position: relative;                    
+                    max-height: 550px;
+                    overflow-y: scroll;
+                    .logs {
+                        width: 100%;
+                        text-align: center;
+                        table-layout: fixed;
+                        tr{
+                            th{
+                                height: 50px;
+                                line-height: 50px;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                background-color: #fafafa;
+                                border-left: 1px solid #eaeded;
+                                &:first-child{
+                                    border-left: none;
+                                }
+                                &.wide{
+                                    width: 200px;
+                                }
+                                &.narrow{
+                                    width: 50px;
+                                }
+                            }
+                            td{
+                                height: 50px;
+                                line-height: 50px;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                background-color: #FFF;
+                                border-left: 1px solid #eaeded;
+                                &:first-child{
+                                    border-left: none;
+                                }
+                            }
+                        }
+                    }
+                    .nolog {
+                        margin-top: 100px;
+                        margin-bottom: 100px;
+                        text-align: center;
+                        button {
+                            font-family: "Noto Sans KR";
+                            background-color: transparent;
+                            color: blue;
+                            border: none;
+                            outline: none;
+                            border-bottom: 1px solid blue;
+                            cursor: pointer;
+                        }
+                    }
+                }
+                .desc {
+                    background-color: rgb(250, 250, 250);
+                    .text {
+                        padding: 20px 20px;
+                        color: red;
+                    }
+                }
+            }            
+        }
+    }
+
+    #evaluate {
+        @extend #popup;
+
+        #wrapper {            
+            #container {
+                position: relative;
+                width: 800px;
+                margin: 0px auto;
+                background-color: #FFF;
+                box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);    
+                .header {
+                    font-size: 14px;
+                    padding: 20px 20px;
+                    background-color: rgb(96, 125, 139);
+                    color: #FFF;
+                    .refresh {
+                        position: absolute;
+                        top: 20px;
+                        right: 20px;
+                        button {
+                            height: 25px;
+                            border: none;
+                            background: transparent;
+                            border-radius: 12.5px;
+                            color: #FFF;
+                            &:hover {
+                                background: #ccc;
+                            }
+                            &.on {
+                                background: #ccc;
+                            }
+                        }
+                    }
+                }
+                .body {
+                    position: relative;                    
+                    max-height: 550px;
+                    overflow-y: scroll;
+                    .logs {
+                        width: 100%;
+                        text-align: center;
+                        table-layout: fixed;
+                        tr{
+                            th{
+                                height: 50px;
+                                line-height: 50px;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                background-color: #fafafa;
+                                border-left: 1px solid #eaeded;
+                                &:first-child{
+                                    border-left: none;
+                                }
+                                &.wide{
+                                    width: 200px;
+                                }
+                                &.narrow{
+                                    width: 50px;
+                                }
+                            }
+                            td{
+                                height: 50px;
+                                line-height: 50px;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                background-color: #FFF;
+                                border-left: 1px solid #eaeded;
+                                &:first-child{
+                                    border-left: none;
+                                }
+                            }
+                        }
+                    }
+                    .nolog {
+                        margin-top: 100px;
+                        margin-bottom: 100px;
+                        text-align: center;
+                        button {
+                            font-family: "Noto Sans KR";
+                            background-color: transparent;
+                            color: blue;
+                            border: none;
+                            outline: none;
+                            border-bottom: 1px solid blue;
+                            cursor: pointer;
+                        }
+                    }
+                }
+                .desc {
+                    background-color: rgb(250, 250, 250);
+                    .text {
+                        padding: 20px 20px;
+                        color: red;
+                    }
+                }
+            }            
+        }
+    }
+
+    #chart {
+        @extend #popup;
+
+        #wrapper {            
+            #container {
+                position: relative;
+                width: 800px;
+                margin: 0px auto;
+                background-color: #FFF;
+                box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);    
+                .header {
+                    font-size: 14px;
+                    padding: 20px 20px;
+                    background-color: rgb(96, 125, 139);
+                    color: #FFF;
+                }
+                .body {
+                    position: relative;
+                    padding: 20px;
+                    .value {
+                        position: relative;
+
+                    }
+                }
+                .desc {
+                    background-color: rgb(250, 250, 250);
+                    .text {
+                        padding: 20px 20px;
+                    }
+                }    
+            }            
+        }
+    }
+
+    #docker {
+        @extend #popup;
+
+        #wrapper {            
+            #container {
+                position: relative;
+                width: 400px;
+                margin: 0px auto;
+                background-color: #FFF;
+                box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1);    
+                .header {
+                    font-size: 14px;
+                    padding: 20px 20px;
+                    background-color: rgb(96, 125, 139);
+                    color: #FFF;
+                }
+                .body {
+                    position: relative;
+                    padding: 20px;
+                    div {
+                        padding-bottom: 5px;
+                        span {
+                            display: inline-block;
+                            width: 40px;
+                        }
+                        input {
+                            margin-left: 10px;
+                            width: 300px;
+                        }
+                    }
+                }
+                .desc {
+                    background-color: rgb(250, 250, 250);
+                    .text {
+                        padding: 20px 20px;
+                    }
+                }    
+            }            
+        }
+    }
+}
+
+@mixin header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 56px;
+    z-index: 999;            
+    .topmenu {
+        line-height: 56px;
+        padding-left: 24px;
+        font-size: 18px;
+        background-color: #041e42;
+
+        .mlp {
+            position: absolute;
+            top: 50%;
+            left: 70px;
+            vertical-align: middle;
+            margin-top: -13px;
+            height: 30px;
+        }
+        .right {
+            .circle {
+                position: absolute;
+                top: 8px;
+                right: 60px;
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                background-color: orange;
+                border-radius: 100px;
+                color: #FFF;
+                line-height: 40px;
+                text-align: center;
+                font-size: 14px;
+                cursor: pointer;
+                &:hover {
+                    background-color: #f1f1f1;
+                }
+            }
+            .usermenu {
+                position: absolute;
+                display: none;
+                top: 56px;
+                right: 60px;
+                background-color: #FFF;
+                border: 1px solid #ccc;
+                width: 110px;
+                font-size: 14px;
+                ul {
+                    li {
+                        display: flex;
+                        padding: 0 24px;
+                        height: 40px;
+                        line-height: 40px;
+                        cursor: pointer;
+                        &:hover {
+                            background-color: #f1f1f1;
+                        } 
+                    }
+                }
+                &.on {
+                    display: block;
+                }
+            }
+        }
+        .searchbar {
+            display: none;
+        }
+    }
+    .sidemenu {
+        position: absolute;
+        top: 0px;
+        left: 0px;              
+        .contents {
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: -200px;
+            width: 200px;
+            height: 100vh;
+            background-color: #FFF;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            transition: left .1s ease-out; 
+            .top {
+                height: 56px;
+                line-height: 56px;
+                position: relative;
+                padding-left: 24px;
+                .icon-MLP_Design_Logo_s {
+                    position: absolute;
+                    top: 50%;
+                    left: 70px;
+                    vertical-align: middle;
+                    margin-top: -13px;
+                    height: 30px;
+                }
+                button {
+                    display: inline-block;
+                    width: 25px;
+                    height: 25px;
+                    text-align: center;
+                    border: none;
+                    background: #FFF;
+                    border-radius: 12.5px;
+                    color: #041e42;
+                    cursor: pointer;
+                    &:hover {
+                        background: #f1f1f1;
+                    }
+                }
+            }
+            ul {
+                li {
+                    display: flex;
+                    padding: 0 24px;
+                    height: 40px;
+                    line-height: 40px;
+                    cursor: pointer;
+                    .icon {
+                        .icon-icon_wallhack_40{
+                            display: block;
+                        }
+                        .icon-icon_nxflow_40{
+                            display: block;
+                        }
+                    }
+                    &:hover {
+                        background-color: #f1f1f1;
+                    } 
+                }
+            }
+        }      
+        .mask {
+            position: absolute;
+            display: none;      
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, .5);
+        }  
+        &.on {
+            .contents {
+                left: 0px;
+            }
+            .mask {
+                display: block;
+            }
+        }  
+    }
+}
+
+@mixin left {
+    position: fixed;
+    margin-top: 56px;
+    top: 0px;
+    left: 0px;
+    min-width: 72px;
+    max-width: 72px;
+    height: 100%;
+    background-color: #FFF;
+    font-size: 14px;
+    z-index: 998;
+    transition: all .1s ease-out;
+}
+
+@media only screen  and (max-width : 768px) {
+    #project {        
+        .hide{
+            display: none;
+        }
+
+        header {
+            @include header;
+        }
+
+        aside {
+            @include left;
+            min-width: 72px;
+            max-width: 72px;
+            .part {
+                margin-top: 20px;
+                padding: 0 24px;
+            }
+            .menu {
+                margin-top: 10px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #f1f1f1;;
+                .submenu {
+                    display: flex;
+                    padding: 0 24px;
+                    height: 40px;
+                    line-height: 40px;
+                    .icon {
+                        flex: 1;
+                        text-align: center;
+                    }
+                    .title {
+                        display: none;
+                    }
+                    &:hover {
+                        background-color: #f1f1f1;
+                    } 
+                }
+            }
+            .part {
+                display: none;
+            } 
+            .nomenu {
+                display: none;
+            }        
+            .copyright {
+                display: none;
+            }
+        }
+    
+        section {
+            padding-left: 72px;
+            background-color: #f1f1f1;
+            font-size: 14px;
+            transition: all .1s ease-out;
+            overflow-x: hidden;
+            
+            .background {
+                .icon-nxflow {
+                    height: 0;
+                }
+            }
+    
+            .title {
+                padding: 60px 0px 0px 0px;
+                position: relative;
+                background-color: #FFF;
+                .date {
+                    position: relative;
+                    display: flex;
+                    .weather {
+                        flex: none;
+                        width: 80px;
+                        height: 80px;
+                        margin-right: 24px;;
+                        .icon-icon_nxflow_80 {
+                            display: block;
+                            width: 79px;
+                            height: 79px;
+                            border-radius: 40px;
+                        }
+                    }
+                    .summary {
+                        flex: 1;
+                        .nxflow {
+                            margin-top: 15px;
+                            font-size: 1.4rem;
+                            font-weight: 500;
+                        }
+                    }
+                }
+                .tabs {
+                    margin-top: 10px;
+                    display: flex;
+                    white-space: nowrap;
+                    li {
+                        display: inline-block;
+                        box-sizing: border-box;
+                        width: 78px;
+                        height: 49px;
+                        line-height: 49px;
+                        text-align: center;
+                        font-weight: 400;
+                        &:hover {
+                            border-bottom: 3px solid #000;
+                        }
+                        &.active {
+                            border-bottom: 3px solid #000;
+                        }              
+                    }
+                }
+            }
+    
+            .detail {
+                padding: 0;
+                position: relative;
+                min-height: 70vh;
+                overflow-x: hidden;
+                .slide {            
+                    width: 300%;
+                    transition: .3s all ease;
+                    display: flex;
+                    &.one {
+                        width: 100%;
+                    }
+                    .env {
+                        position: relative;
+                        flex: 1;
+                        min-width: 33.3%;
+                        .desc {
+                            text-align: center;
+                            th {
+                                height: 50px;
+                                line-height: 50px;
+                                background-color: #fafafa;
+                                border-bottom: 1px solid #eaeded;
+                                &:first-child{
+                                    border-left: none;
+                                }
+                            }
+                            tr {
+                                td {
+                                    height: 45px;
+                                    line-height: 45px;
+                                    background-color: #FFF;
+                                    &:first-child{
+                                        width: 200px;
+                                        border-right: 1px solid #eaeded;
+                                    }
+                                    &:nth-child(2) {
+                                        width: calc(100% - 200px);
+                                        text-align: left;
+                                        padding-left: 40px;
+                                    }
+                                    button {
+                                        width: 25px;
+                                        height: 25px;
+                                        margin-left: 10px;
+                                        font-size: 15px;
+                                        border: none;
+                                        background-color: transparent;
+                                        outline: none;
+                                        border-radius: 25px;
+                                        &:hover {
+                                            background-color: #ccc;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .download {
+                            margin-top: 10px;
+                            button {
+                                width: 74px;
+                                height: 40px;
+                                border-radius: 4px;
+                                font-size: 14px;
+                                border: none;
+                                background-color: rgba(0,0,0,.1);
+                                outline: none;
+                                &:hover {
+                                    background-color: #041e42;
+                                    color: #FFF;
+                                }
+                            }
+                        }
+                    }
+                    .train {        
+                        position: relative;                
+                        flex: 1;
+                        min-width: 33.3%;
+                        .repo {
+                            width: 100%;
+                            box-shadow: 1px 1px #ccc;
+                            margin-bottom: 20px;
+                            .top {
+                                position: relative;
+                                height: 50px;
+                                line-height: 50px;
+                                background-color: #fafafa;
+                                border-bottom: 1px solid #eaeded;
+                                text-align: center;
+                                font-weight: 700;
+                                .create {
+                                    position: absolute;
+                                    top: 0px;
+                                    right: 20px;
+                                    button {
+                                        height: 25px;
+                                        border: none;
+                                        background: transparent;
+                                        border-radius: 12.5px;
+                                        &:hover {
+                                            background: #ccc;
+                                        }
+                                        &.on {
+                                            background: #ccc;
+                                        }
+                                    }
+                                }
+                            }
+                            .images {
+                                padding: 20px;
+                                background-color: #FFF;
+                                ul {
+                                    width: 100%;
+                                    .image {
+                                        min-width: 250px;
+                                        margin: 5px;
+                                        border: 1px solid #ccc;
+                                        border-radius: 5px;
+                                        transition: all 0.3s ease;
+                                        &:hover {
+                                            border: 2px solid  $blue-color;
+                                            cursor: pointer;
+                                        }
+                                        .tops {
+                                            position: relative;
+                                            padding: 10px;
+                                            .name {
+                                                font-size: 16px;
+                                                font-weight: 700;
+                                            }
+                                            .status {
+                                                position: absolute;
+                                                top: 25px;
+                                                right: 10px;
+                                                color: #FFF;
+                                                border-radius: 20px;
+                                                padding-left: 10px;
+                                                padding-right: 10px;
+                                                &.create {
+                                                    background-color: $yellow-color;
+                                                }
+                                                &.running {
+                                                    background-color: $green-color;
+                                                }
+                                                &.completed {
+                                                    background-color: $blue-color;
+                                                }
+                                                &.pending {
+                                                    background-color: $red-color;
+                                                }
+                                                &.evicted {
+                                                    background-color: $purple-color;
+                                                }
+                                            }
+                                        }
+                                        .btns {
+                                            position: absolute;
+                                            top: 20px;
+                                            right: 20px;
+                                            button {
+                                                margin-right: 5px;
+                                                height: 25px;
+                                                border: none;
+                                                background: transparent;
+                                                border-radius: 12.5px;
+                                                &:hover {
+                                                    background: #ccc;
+                                                    cursor: pointer;
+                                                }
+                                                &.on {
+                                                    background: #ccc;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .pagenation {
+                                text-align: center;
+                                padding-bottom: 30px;
+                                background-color: #FFF;
+                                button {
+                                    width: 20px;
+                                    height: 22px;
+                                    border-radius: 4px;
+                                    font-size: 12px;
+                                    border: none;
+                                    background-color: rgba(0,0,0,.1);
+                                    outline: none;
+                                    &:hover {
+                                        background-color: #041e42;
+                                        color: #FFF;
+                                    }
+                                    &.active {
+                                        background-color: #041e42;
+                                        color: #FFF;
+                                    }
+                                }
+                            }
+                        }
+                        .dashboard {
+                            width: 100%;
+                            box-shadow: 1px 1px #ccc;
+                            margin-bottom: 20px;
+                            .top {
+                                position: relative;
+                                height: 50px;
+                                line-height: 50px;
+                                background-color: #fafafa;
+                                border-bottom: 1px solid #eaeded;
+                                text-align: center;
+                                font-weight: 700;
+                                .refresh {
+                                    position: absolute;
+                                    top: 0px;
+                                    right: 20px;
+                                    button {
+                                        height: 25px;
+                                        border: none;
+                                        background: transparent;
+                                        border-radius: 12.5px;
+                                        &:hover {
+                                            background: #ccc;
+                                        }
+                                        &.on {
+                                            background: #ccc;
+                                        }
+                                    }
+                                }
+                            }
+                            .pods {
+                                padding: 20px;
+                                background-color: #FFF;
+                                ul {
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: row;
+                                    flex-wrap : wrap;
+                                    .pod {
+                                        min-width: 250px;
+                                        margin: 5px;
+                                        border: 2px solid #ccc;
+                                        border-radius: 5px;
+                                        transition: all 0.3s ease;
+                                        &:hover {
+                                            transform: translate(0px, -5px);
+                                            box-shadow: 1px 1px #ccc;                                        
+                                        }
+                                        .tops {
+                                            position: relative;
+                                            padding: 10px;
+                                            .name {
+                                                font-size: 16px;
+                                                font-weight: 700;
+                                                &:hover {
+                                                    cursor: pointer;                                      
+                                                }                                            
+                                            }
+                                            .status {
+                                                position: absolute;
+                                                top: 25px;
+                                                right: 10px;
+                                                color: #FFF;
+                                                border-radius: 20px;
+                                                padding-left: 10px;
+                                                padding-right: 10px;
+                                                &.create {
+                                                    background-color: $yellow-color;
+                                                }
+                                                &.running {
+                                                    background-color: $green-color;
+                                                }
+                                                &.completed {
+                                                    background-color: $blue-color;
+                                                }
+                                                &.pending {
+                                                    background-color: $red-color;
+                                                }
+                                                &.evicted {
+                                                    background-color: $purple-color;
+                                                }
+                                            }
+                                        }
+                                        .btns {
+                                            background-color: #fafafa;
+                                            padding: 5px;
+                                            text-align: center;
+                                            border-top: 1px solid #ccc;
+                                            button {                                            
+                                                display: inline-block;
+                                                width: 40%;
+                                                height: 25px;
+                                                text-align: center;
+                                                border: none;
+                                                background: transparent;
+                                                border-radius: 12.5px;
+                                                &:hover {
+                                                    background: #ccc;
+                                                }
+                                                &.on {
+                                                    background: #ccc;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .log {
+                        position: relative;
+                        flex: 1;
+                        min-width: 33.3%;                        
+                        .search {
+                            margin-bottom: 10px;
+                            height: 30px;
+                            line-height: 30px;
+                            span {
+                                display: inline-block;
+                                width: 40px;
+                                height: 22px;
+                                line-height: 22px;
+                                background-color: #041e42;
+                                color: #FFF;
+                                vertical-align: middle;
+                                text-align: center;
+                                border-radius: 4px;
+                            }
+                            input {
+                                width: 250px;
+                                height: 20px;
+                                line-height: 20px;
+                                vertical-align: middle;
+                                border-radius: 4px;
+                                border: none;
+                                border: 1px solid #ccc;
+                                outline: none;
+                            }
+                        }                    
+                        .logs {
+                            width: 100%;
+                            text-align: center;
+                            box-shadow: 1px 1px #ccc;
+                            table-layout: fixed;
+                            tr{
+                                th{
+                                    height: 50px;
+                                    line-height: 50px;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    background-color: #fafafa;
+                                    border-left: 1px solid #eaeded;
+                                    &:first-child{
+                                        border-left: none;
+                                    }
+                                    &.wide{
+                                        width: 200px;
+                                    }
+                                    &.narrow {
+                                        width: 75px;
+                                    }
+                                }
+                                td{
+                                    height: 50px;
+                                    line-height: 50px;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    background-color: #FFF;
+                                    button.copy {
+                                        width: 25px;
+                                        height: 25px;
+                                        margin-left: 5px;
+                                        font-size: 15px;
+                                        border: none;
+                                        background-color: transparent;
+                                        outline: none;
+                                        border-radius: 25px;
+                                        &:hover {
+                                            background-color: #ccc;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .pagenation {
+                            margin-top: 10px;
+                            button {
+                                width: 40px;
+                                height: 22px;
+                                border-radius: 4px;
+                                font-size: 12px;
+                                border: none;
+                                background-color: rgba(0,0,0,.1);
+                                outline: none;
+                                &:hover {
+                                    background-color: #041e42;
+                                    color: #FFF;
+                                }
+                                &.active {
+                                    background-color: #041e42;
+                                    color: #FFF;
+                                }
+                            }
+                        }
+                        .nolog {
+                            margin-top: 250px;
+                            text-align: center;
+                            button {
+                                font-family: "Noto Sans KR";
+                                background-color: transparent;
+                                color: blue;
+                                border: none;
+                                outline: none;
+                                border-bottom: 1px solid blue;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                    &.step2 {
+                        margin-left: -100%;
+                    }
+                    &.step3 {
+                        margin-left: -200%;
+                    }         
+                }
+            }
+            
+        }        
+    }
+}
+
+@media only screen  and (min-width : 769px) {
+    #project {
+
+        header {
+            @include header;
+        }
+
+        aside {
+            @include left;
+            min-width: 240px;
+            max-width: 240px;
+            .part {
+                margin-top: 20px;
+                padding: 0 24px;
+            }
+            .menu {
+                margin-top: 10px;
+                padding-bottom: 10px;
+                border-bottom: 1px solid #f1f1f1;;
+                .submenu {
+                    display: flex;
+                    padding: 0 24px;
+                    height: 40px;
+                    line-height: 40px;
+                    .icon {
+                        flex: 1;
+                        text-align: center;
+                    }
+                    .title {
+                        flex: 5;
+                        .realtime {
+                            padding-left: 5px;
+                            padding-right: 8px;
+                            margin-left: 3px;
+                            width: 50px;
+                            height: 14px;
+                            background-color: $red-color;
+                            font-size: 12px;
+                            color: #FFF;
+                            border-radius: 10px;
+                        }
+                    }
+                    &:hover {
+                        background-color: #f1f1f1;
+                    } 
+                }
+            }
+            .nomenu {
+                margin-top: 10px;
+                padding-left: 34px;
+                padding-bottom: 10px;
+                height: 40px;
+                line-height: 40px;
+            }
+            .copyright {
+                padding-top: 20px;
+                padding-bottom: 20px;
+                text-align: center;
+            }
+        }
+    
+        section {
+            margin-top: 56px;
+            padding-left: 240px;
+            background-color: #f1f1f1;
+            font-size: 14px;
+            min-width: 1140px;
+            transition: all .1s ease-out;
+            overflow-x: hidden;
+            
+            .background {
+                position: relative;
+                .icon-nxflow {
+                    width: 100vw;
+                    display: block;
+                }
+            }
+    
+            .title {
+                padding: 16px 150px 0px;
+                position: relative;
+                background-color: #FFF;
+                .date {
+                    position: relative;
+                    display: flex;
+                    .weather {
+                        flex: none;
+                        width: 80px;
+                        height: 80px;
+                        margin-right: 24px;;
+                        .icon-icon_nxflow_80 {
+                            display: block;
+                            width: 79px;
+                            height: 79px;
+                            border-radius: 40px;
+                        }
+                    }
+                    .summary {
+                        flex: 1;
+                        .nxflow {
+                            margin-top: 15px;
+                            font-size: 1.4rem;
+                            font-weight: 500;
+                        }
+                    }
+                }
+                .tabs {
+                    margin-top: 10px;
+                    display: flex;
+                    white-space: nowrap;
+                    li {
+                        display: inline-block;
+                        box-sizing: border-box;
+                        width: 78px;
+                        height: 49px;
+                        line-height: 49px;
+                        text-align: center;
+                        font-weight: 400;
+                        &:hover {
+                            border-bottom: 3px solid #000;
+                        }
+                        &.active {
+                            border-bottom: 3px solid #000;
+                        }              
+                    }
+                }
+            }
+    
+            .detail {            
+                padding-top: 30px;
+                min-height: 70vh;
+                width: 100%;
+                overflow-x: hidden;
+                .slide {
+                    display: flex;
+                    width: 300%;
+                    transition: .3s all ease; 
+                    &.one {
+                        width: 100%;
+                    }            
+                    .env {
+                        position: relative;
+                        padding: 24px 150px;
+                        padding-top: 10px;
+                        padding-bottom: 30px;
+                        width: 100%;
+                        .desc {
+                            width: 100%;
+                            text-align: center;
+                            box-shadow: 1px 1px #ccc;
+                            th {
+                                height: 50px;
+                                line-height: 50px;
+                                background-color: #fafafa;
+                                border-bottom: 1px solid #eaeded;
+                                &:first-child{
+                                    border-left: none;
+                                }
+                            }
+                            tr {
+                                td {
+                                    height: 45px;
+                                    line-height: 45px;
+                                    background-color: #FFF;
+                                    &:first-child{
+                                        width: 200px;
+                                        border-right: 1px solid #eaeded;
+                                    }
+                                    &:nth-child(2) {
+                                        text-align: left;
+                                        padding-left: 40px;
+                                    }
+                                    button {
+                                        width: 25px;
+                                        height: 25px;
+                                        margin-left: 10px;
+                                        font-size: 15px;
+                                        border: none;
+                                        background-color: transparent;
+                                        outline: none;
+                                        border-radius: 25px;
+                                        &:hover {
+                                            background-color: #ccc;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .download {
+                            margin-top: 10px;
+                            button {
+                                width: 74px;
+                                height: 40px;
+                                border-radius: 4px;
+                                font-size: 14px;
+                                border: none;
+                                background-color: rgba(0,0,0,.1);
+                                outline: none;
+                                &:hover {
+                                    background-color: #041e42;
+                                    color: #FFF;
+                                }
+                            }
+                        }
+                    }
+                    .train {
+                        position: relative;
+                        padding: 24px 150px;
+                        padding-top: 10px;
+                        padding-bottom: 30px;
+                        width: 100%;
+                        .repo {
+                            width: 100%;
+                            box-shadow: 1px 1px #ccc;
+                            margin-bottom: 20px;
+                            .top {
+                                position: relative;
+                                height: 50px;
+                                line-height: 50px;
+                                background-color: #fafafa;
+                                border-bottom: 1px solid #eaeded;
+                                text-align: center;
+                                font-weight: 700;
+                                .create {
+                                    position: absolute;
+                                    top: 0px;
+                                    right: 20px;
+                                    button {
+                                        height: 25px;
+                                        border: none;
+                                        background: transparent;
+                                        border-radius: 12.5px;
+                                        &:hover {
+                                            background: #ccc;
+                                        }
+                                        &.on {
+                                            background: #ccc;
+                                        }
+                                    }
+                                }
+                            }
+                            .images {
+                                padding: 20px;
+                                background-color: #FFF;
+                                ul {
+                                    width: 100%;
+                                    .image {
+                                        min-width: 250px;
+                                        margin: 5px;
+                                        border: 1px solid #ccc;
+                                        border-radius: 5px;
+                                        transition: all 0.3s ease;
+                                        &:hover {
+                                            border: 2px solid  $blue-color;
+                                            cursor: pointer;
+                                        }
+                                        .tops {
+                                            position: relative;
+                                            padding: 10px;
+                                            .name {
+                                                font-size: 16px;
+                                                font-weight: 700;
+                                            }
+                                            .status {
+                                                position: absolute;
+                                                top: 25px;
+                                                right: 10px;
+                                                color: #FFF;
+                                                border-radius: 20px;
+                                                padding-left: 10px;
+                                                padding-right: 10px;
+                                                &.create {
+                                                    background-color: $yellow-color;
+                                                }
+                                                &.running {
+                                                    background-color: $green-color;
+                                                }
+                                                &.completed {
+                                                    background-color: $blue-color;
+                                                }
+                                                &.pending {
+                                                    background-color: $red-color;
+                                                }
+                                                &.evicted {
+                                                    background-color: $purple-color;
+                                                }
+                                            }
+                                        }
+                                        .btns {
+                                            position: absolute;
+                                            top: 20px;
+                                            right: 20px;
+                                            button {
+                                                margin-right: 5px;
+                                                height: 25px;
+                                                border: none;
+                                                background: transparent;
+                                                border-radius: 12.5px;
+                                                &:hover {
+                                                    background: #ccc;
+                                                    cursor: pointer;
+                                                }
+                                                &.on {
+                                                    background: #ccc;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .pagenation {
+                                text-align: center;
+                                padding-bottom: 30px;
+                                background-color: #FFF;
+                                button {
+                                    width: 20px;
+                                    height: 22px;
+                                    border-radius: 4px;
+                                    font-size: 12px;
+                                    border: none;
+                                    background-color: rgba(0,0,0,.1);
+                                    outline: none;
+                                    &:hover {
+                                        background-color: #041e42;
+                                        color: #FFF;
+                                    }
+                                    &.active {
+                                        background-color: #041e42;
+                                        color: #FFF;
+                                    }
+                                }
+                            }
+                        }
+                        .dashboard {
+                            width: 100%;
+                            box-shadow: 1px 1px #ccc;
+                            margin-bottom: 20px;
+                            .top {
+                                position: relative;
+                                height: 50px;
+                                line-height: 50px;
+                                background-color: #fafafa;
+                                border-bottom: 1px solid #eaeded;
+                                text-align: center;
+                                font-weight: 700;
+                                .refresh {
+                                    position: absolute;
+                                    top: 0px;
+                                    right: 20px;
+                                    button {
+                                        height: 25px;
+                                        border: none;
+                                        background: transparent;
+                                        border-radius: 12.5px;
+                                        &:hover {
+                                            background: #ccc;
+                                        }
+                                        &.on {
+                                            background: #ccc;
+                                        }
+                                    }
+                                }
+                            }
+                            .pods {
+                                padding: 20px;
+                                background-color: #FFF;
+                                ul {
+                                    width: 100%;
+                                    display: flex;
+                                    flex-direction: row;
+                                    flex-wrap : wrap;
+                                    .pod {
+                                        min-width: 250px;
+                                        margin: 5px;
+                                        border: 2px solid #ccc;
+                                        border-radius: 5px;
+                                        transition: all 0.3s ease;
+                                        &:hover {
+                                            transform: translate(0px, -5px);
+                                            box-shadow: 1px 1px #ccc;                                        
+                                        }
+                                        .tops {
+                                            position: relative;
+                                            padding: 10px;
+                                            .name {
+                                                font-size: 16px;
+                                                font-weight: 700;
+                                                &:hover {
+                                                    cursor: pointer;                                      
+                                                }                                            
+                                            }
+                                            .status {
+                                                position: absolute;
+                                                top: 25px;
+                                                right: 10px;
+                                                color: #FFF;
+                                                border-radius: 20px;
+                                                padding-left: 10px;
+                                                padding-right: 10px;
+                                                &.create {
+                                                    background-color: $yellow-color;
+                                                }
+                                                &.running {
+                                                    background-color: $green-color;
+                                                }
+                                                &.completed {
+                                                    background-color: $blue-color;
+                                                }
+                                                &.pending {
+                                                    background-color: $red-color;
+                                                }
+                                                &.evicted {
+                                                    background-color: $purple-color;
+                                                }
+                                            }
+                                        }
+                                        .btns {
+                                            background-color: #fafafa;
+                                            padding: 5px;
+                                            text-align: center;
+                                            border-top: 1px solid #ccc;
+                                            button {                                            
+                                                display: inline-block;
+                                                width: 40%;
+                                                height: 25px;
+                                                text-align: center;
+                                                border: none;
+                                                background: transparent;
+                                                border-radius: 12.5px;
+                                                &:hover {
+                                                    background: #ccc;
+                                                }
+                                                &.on {
+                                                    background: #ccc;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .log {
+                        position: relative;
+                        padding: 24px 150px;
+                        padding-top: 10px;
+                        padding-bottom: 30px;
+                        width: 100%;
+                        .search {
+                            margin-bottom: 10px;
+                            height: 30px;
+                            line-height: 30px;
+                            span {
+                                display: inline-block;
+                                width: 40px;
+                                height: 22px;
+                                line-height: 22px;
+                                background-color: #041e42;
+                                color: #FFF;
+                                vertical-align: middle;
+                                text-align: center;
+                                border-radius: 4px;
+                            }
+                            input {
+                                width: 300px;
+                                height: 20px;
+                                line-height: 20px;
+                                vertical-align: middle;
+                                border-radius: 4px;
+                                border: none;
+                                border: 1px solid #ccc;
+                                outline: none;
+                            }
+                        }                    
+                        .logs {
+                            width: 100%;
+                            text-align: center;
+                            box-shadow: 1px 1px #ccc;
+                            table-layout: fixed;
+                            tr{
+                                th{
+                                    height: 50px;
+                                    line-height: 50px;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    background-color: #fafafa;
+                                    border-left: 1px solid #eaeded;
+                                    &:first-child{
+                                        border-left: none;
+                                    }
+                                    &.wide{
+                                        width: 200px;
+                                    }
+                                    &.narrow {
+                                        width: 75px;
+                                    }
+                                }
+                                td{
+                                    height: 50px;
+                                    line-height: 50px;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    background-color: #FFF;
+                                    button.copy {
+                                        width: 25px;
+                                        height: 25px;
+                                        margin-left: 5px;
+                                        font-size: 15px;
+                                        border: none;
+                                        background-color: transparent;
+                                        outline: none;
+                                        border-radius: 25px;
+                                        &:hover {
+                                            background-color: #ccc;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .pagenation {
+                            margin-top: 10px;
+                            button {
+                                width: 40px;
+                                height: 22px;
+                                border-radius: 4px;
+                                font-size: 12px;
+                                border: none;
+                                background-color: rgba(0,0,0,.1);
+                                outline: none;
+                                &:hover {
+                                    background-color: #041e42;
+                                    color: #FFF;
+                                }
+                                &.active {
+                                    background-color: #041e42;
+                                    color: #FFF;
+                                }
+                            }
+                        }
+                        .nolog {
+                            margin-top: 250px;
+                            text-align: center;
+                            button {
+                                font-family: "Noto Sans KR";
+                                background-color: transparent;
+                                color: blue;
+                                border: none;
+                                outline: none;
+                                border-bottom: 1px solid blue;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                    &.step2 {
+                        margin-left: -100%;
+                    }
+                    &.step3 {
+                        margin-left: -200%;
+                    }         
+                }
+            }
+            
+        }        
+    }
+}
+
+
+

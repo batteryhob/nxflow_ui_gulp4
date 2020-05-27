@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MLP</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.0.4/wNumb.min.js"></script>
+    
+    <link rel="stylesheet" href="./css/common/common.css">
+    <link rel="stylesheet" href="./css/project/project.css">
+    <link rel="stylesheet" href="./sprite/sprite.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+
+    <script>
+
+        var train = [
+            {
+                accuracy: 20,
+                loss: 3,
+                val_accuracy: 11,
+                val_loss: 2
+            },
+            {
+                accuracy: 30,
+                loss: 3,
+                val_accuracy: 11,
+                val_loss: 2
+            },
+            {
+                accuracy: 40,
+                loss: 3,
+                val_accuracy: 11,
+                val_loss: 2
+            },
+            {
+                accuracy: 50,
+                loss: 3,
+                val_accuracy: 11,
+                val_loss: 2
+            },
+            {
+                accuracy: 50,
+                loss: 3,
+                val_accuracy: 11,
+                val_loss: 2
+            },
+        ]
+
+        //epoch갯수뽑기
+        var epochcnt = train.length
+        var epoch = []
+        for(var i=0; i < epochcnt ;i++){
+            epoch.push("epoch" + (i+1))
+        }
+        
+        // 단일obj키뽑기
+        var keys = Object.keys(train[0])
+        console.log(keys)
+        
+        // 키별로 값넣기
+        var obj={};
+        for(var i=0; i < keys.length ;i++){
+            obj[keys[i]] = Object.keys(train).map(function (key) { 
+                return train[key][Object.keys(train[key])[i]]
+            });
+        }
+
+        window.chartColors = {
+            red: 'rgb(255, 99, 132)',
+            orange: 'rgb(255, 159, 64)',
+            yellow: 'rgb(255, 205, 86)',
+            green: 'rgb(75, 192, 192)',
+            blue: 'rgb(54, 162, 235)',
+            purple: 'rgb(153, 102, 255)',
+            grey: 'rgb(201, 203, 207)'
+        };
+
+		var config = {
+			type: 'line',
+			data: {
+				labels: epoch,
+				datasets: [{
+					label: keys[0],
+					backgroundColor: window.chartColors.red,
+					borderColor: window.chartColors.red,
+					data: obj[keys[0]],
+					fill: false,
+				}, {
+					label: keys[1],
+					backgroundColor: window.chartColors.blue,
+					borderColor: window.chartColors.blue,
+					data: obj[keys[1]],
+					fill: false,
+				}, {
+					label: keys[2],
+					backgroundColor: window.chartColors.green,
+					borderColor: window.chartColors.green,
+					data: obj[keys[2]],
+					fill: false,
+				}, {
+					label: keys[3],
+					backgroundColor: window.chartColors.purple,
+					borderColor: window.chartColors.purple,
+					data: obj[keys[3]],
+					fill: false,
+				}]
+			},
+			options: {
+				responsive: true,
+				title: {
+					display: false,
+					text: 'history 차트'
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: false,
+							labelString: 'Epoch'
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: false,
+							labelString: 'Value'
+						}
+					}]
+				}
+			}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myLine = new Chart(ctx, config);
+		};  
+
+    
+    </script>
+</head>
+
+<body>
+
+    <div id="project">
+        <header>
+            <div class="topmenu">
+                <button class="menu">    
+                    <i class="fas fa-bars"></i>
+                </button>                
+                <i class="mlp icon-MLP_Design_Logo_s"></i>
+                <div class="searchbar">
+                    <div class="select">
+                        <label for="selectCategory">전체</label>
+                        <select id="selectCategory">
+                            <option value="전체">전체</option>
+                        </select>
+                    </div>
+                    <input type="search" placeholder="MLP서비스 검색">
+                    <button><i class="fas fa-search"></i></button>
+                </div>    
+                <div class="right">
+                    <div class="circle">
+                        지호
+                    </div>
+                    <div class="usermenu">
+                        <ul>
+                            <li>
+                                <div class="icon">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </div>
+                                <div class="title">
+                                    로그아웃
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="sidemenu">
+                <div class="mask">
+                </div>
+                <div class="contents">
+                    <div class="top">
+                        <button>   
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <i class="icon-MLP_Design_Logo_s"></i>
+                    </div>
+                    <ul>
+                        <li>
+                            <div class="icon">
+                                <i class="icon-icon_wallhack_40"></i>
+                            </div>
+                            <div class="title">
+                                월핵탐지
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon">
+                                <i class="icon-icon_nxflow_40"></i>
+                            </div>
+                            <div class="title">
+                                NXFLOW
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        
+        <aside>            
+            <div class="part">
+                나의 프로젝트
+            </div>
+            <ul class="menu">
+                <li class="submenu">
+                    <div class="icon">
+                        <i class="far fa-file-alt"></i>
+                    </div>
+                    <div class="title">
+                        프로젝트 명 1
+                    </div>
+                </li>
+                <li class="submenu">
+                    <div class="icon">
+                        <i class="far fa-file-alt"></i>
+                    </div>
+                    <div class="title">
+                        프로젝트 명 2
+                    </div>
+                </li>
+            </ul>
+            <div class="copyright">
+                © 2019 Intelligence Labs, MLP
+            </div>
+        </aside>
+
+        <section>
+            <div class="background">
+                <i class="icon-nxflow"></i>
+            </div>
+            <div class="title">
+                <div class="date">
+                    <div class="weather">
+                        <i class="icon-icon_nxflow_80"></i>
+                    </div>
+                    <div class="summary">
+                        <p class="nxflow">NXFLOW</p>
+                        <div>
+                            <div>
+                                프로젝트명 1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="tabs">
+                    <li class="active">
+                        Env
+                    </li>
+                    <li>
+                        Training
+                    </li>
+                    <li>
+                        Output
+                    </li>
+                </ul>
+            </div>
+            <div class="detail">
+
+                <div class="slide step2">
+                    <div class="env">
+                        <table class="desc">
+                            <thead>
+                                <th colspan="2">
+                                    KUBERNETES 환경구성
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        프로젝트
+                                    </td>
+                                    <td>
+                                        wallhack
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        노드
+                                    </td>
+                                    <td>
+                                        ip-10-197-55-33.ap-northeast-2.compute.internal
+                                        <button><i class="far fa-copy"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        레이블
+                                    </td>
+                                    <td>
+                                        ml.nexon.com/project=wallhack
+                                        <button><i class="far fa-copy"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        EC2
+                                    </td>
+                                    <td>
+                                        g4dn.8xlarge
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        GPU CNT
+                                    </td>
+                                    <td>
+                                        1
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        S3 BUCKET
+                                    </td>
+                                    <td>
+                                        solution-ml-flow
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        S3 REGION
+                                    </td>
+                                    <td>
+                                        ap-northeast-2
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        S3 MODEL PATH
+                                    </td>
+                                    <td>
+                                        wallhack/models
+                                        <button><i class="far fa-copy"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        S3 RESULT PATH
+                                    </td>
+                                    <td>
+                                        wallhack/results
+                                        <button><i class="far fa-copy"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        DEPLOY PATH
+                                    </td>
+                                    <td>
+                                        NULL
+                                        <button><i class="far fa-copy"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="download">
+                            <button>
+                                JSON
+                            </button>
+                            <button>
+                                YAML
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="train">
+                        <div class="dashboard">
+                            <div class="top">
+                                KUBERNETES 컨테이너 현황
+                                <div class="refresh">
+                                    <button><i class="fas fa-redo"></i></button>
+                                </div>
+                            </div>
+                            <div class="pods">
+                                <ul>
+                                    <% for(var i=0; i<10; i++) { %>
+                                        <li class="pod">
+                                            <div>
+                                                <div class="tops">
+                                                    <div class="name">
+                                                        mnlist-123klkn
+                                                    </div>
+                                                    <div class="time">
+                                                        12h ago
+                                                    </div>
+                                                    <div class="status completed">
+                                                        Completed
+                                                    </div>
+                                                </div>
+                                                <div class="btns">
+                                                    <button>
+                                                        logs
+                                                    </button>
+                                                    <button>
+                                                        delete
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="repo">
+                            <div class="top">
+                                DOCKER 리포지토리 목록
+                                <div class="create">
+                                    <button><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                            <div class="images">
+                                <ul>
+                                    <% for(var i=0; i<5; i++) { %>
+                                        <li class="image">
+                                            <div>
+                                                <div class="tops">
+                                                    <div class="name">
+                                                        947146334561.dkr.ecr.ap-northeast-2.amazonaws.com/solution-ml-nxflow:latest
+                                                    </div>
+                                                    <div class="time">
+                                                        2020년04월28일 21:15:23
+                                                    </div>
+                                                    <div class="btns">
+                                                        <button>
+                                                            <i class="fas fa-upload"></i>
+                                                        </button>
+                                                        <button>
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                            <div class="pagenation">
+                                </button>
+                                <% for(var i=0; i<10; i++) { %>
+                                <button class="active">
+                                    <%= i %>
+                                </button>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="log">
+                        <div class="search">
+                            <span><i class="fas fa-search"></i></span>                    
+                            <input type="text">                            
+                        </div>
+                        <table class="logs">
+                            <thead>
+                                <th class="narrow">
+                                    Seq
+                                </th>
+                                <th>
+                                    모델
+                                </th>
+                                <th>
+                                    파드
+                                </th>
+                                <th>
+                                    이미지
+                                </th>
+                                <th class="narrow">
+                                    파라미터
+                                </th>
+                                <th class="narrow">
+                                    히스토리
+                                </th>
+                                <th class="wide"> 
+                                    날짜
+                                </th>
+                                <th class="wide">
+                                    Action
+                                </th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        1
+                                    </td>
+                                    <td>
+                                        11111-2222-333-44.pth
+                                        <button class="copy"><i class="far fa-copy"></i></button>
+                                    </td>
+                                    <td>
+                                        singan-2-m6nb7
+                                    </td>
+                                    <td>
+                                        solution-ml-nxflow:latest
+                                        <button class="copy"><i class="far fa-copy"></i></button>
+                                    </td>
+                                    <td>
+                                        <button class="show">보기</button>
+                                    </td>
+                                    <td>
+                                        <button class="show">보기</button>
+                                    </td>
+                                    <td>
+                                        2020.01.29 17:05:11
+                                    </td>
+                                    <td>
+                                        <button class="evaluate">Evaluate</button>
+                                        <button class="inference">Inference</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagenation">
+                            <button>
+                                Prev
+                            </button>
+                            <% for(var i=0; i<10; i++) { %>
+                            <button class="active">
+                                <%= i %>
+                            </button>
+                            <% } %>
+                            <button>
+                                Next
+                            </button>
+                        </div>
+                        <div class="nolog">
+                            <p>로그가 없습니다</p>
+                            <button>K8S가이드 보기</button>
+                        </div>                        
+                    </div>
+
+                </div>
+            </div>            
+        </section>
+
+        <div id="popup" class="">
+            <div id="wrapper">
+                <div id="container">
+                    <div class="header">
+                       Parameter
+                    </div>
+                    <div class="body">
+                        <div class="value">
+                            <textarea name="" id="" >{
+    "parameters" : {
+                "parameter_1": {
+                    "max_depth": [3, 5, 7],
+                    "min_samples_split": [3,5],
+                    "splitter": [ "best", "random"]
+                },
+                "parameter_2": 56,
+                "parameter_3": 67,
+                "parameter_4": 90
+        }
+    }
+}</textarea>
+                        </div>
+                    </div>                   
+                    <div class="desc">
+                        <div class="text">
+                           항목을 복사하여 사용하여 주세요.
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <button class="cancle">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="popup2" class="">
+            <div id="wrapper">
+                <div id="container">
+                    <div class="header">
+                       Parameter
+                    </div>
+                    <div class="body">
+                        <div class="value">
+                            <textarea name="" id="" >NAMESPACE              NAME                                         READY   STATUS      RESTARTS   AGE
+                                default                mnist-0-44glg                                0/1     Completed   0          6d17h
+                                default                mnist-eval-l6gcp                             0/1     Completed   0          18h
+                                default                singan-2-9r964                               0/1     Completed   0          13d
+                                default                singan-grzcq                                 0/1     Pending     0          12d
+                                kube-system            aws-node-59h7j                               1/1     Running     0          56d
+                                kube-system            coredns-685bd65d99-86n8h                     0/1     Evicted     0          56d
+                                kube-system            coredns-685bd65d99-8g6fj                     1/1     Running     0          12d
+                                kube-system            coredns-685bd65d99-z8tpl                     1/1     Running     0          56d
+                                kube-system            kube-proxy-5bv49                             1/1     Running     0          56d
+                                kube-system            nvidia-device-plugin-daemonset-jtrst         1/1     Running     0          26d
+                                kubernetes-dashboard   dashboard-metrics-scraper-69fcc6d9df-8q5ks   1/1     Running     0          12d
+                                kubernetes-dashboard   kubernetes-dashboard-6d75768647-6smj9        1/1     Running     0          12d</textarea>
+                        </div>
+                    </div>                   
+                    <div class="desc">
+                        <div class="text">
+                           컨테이너 로그가 보여집니다.
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <button class="cancle">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="inference" class="">
+            <div id="wrapper">
+                <div id="container">
+                    <div class="header">
+                        Inference | modelmodel.pth
+                        <div class="refresh">
+                            <button><i class="fas fa-redo"></i></button>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <table class="logs">
+                            <thead>
+                                <th class="narrow">
+                                    Seq
+                                </th>
+                                <th>
+                                    Output
+                                </th>
+                                <th>
+                                    날짜
+                                </th>
+                                <th>
+                                    다운
+                                </th>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i<20; i++) { %>
+                                <tr>
+                                    <td>
+                                        3
+                                    </td>
+                                    <td>
+                                        Filename.png                              
+                                    </td>
+                                    <td>
+                                        2020년3월12일                                        
+                                    </td>
+                                    <td>
+                                        <button class="show">다운</button>                                        
+                                    </td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                        <div class="nolog">
+                            <p>로그가 없습니다</p>
+                            <button>Inference 가이드 보기</button>
+                        </div>
+                    </div>
+                    <div class="desc">
+                        <div class="text">
+                            **모델 별 inference output 입니다.
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <button class="inference">Inference</button>
+                        <button class="cancle">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="evaluate" class="">
+            <div id="wrapper">
+                <div id="container">
+                    <div class="header">
+                        Evaluate | modelmodel.pth
+                        <div class="refresh">
+                            <button><i class="fas fa-redo"></i></button>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <table class="logs">
+                            <thead>
+                                <th>
+                                    Seq
+                                </th>
+                                <th>
+                                    Accuracy
+                                </th>
+                                <th>
+                                    Loss
+                                </th>
+                                <th>
+                                    상태
+                                </th>
+                                <th class="wide">
+                                    날짜
+                                </th>
+                                <th>
+                                    배포
+                                </th>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i<20; i++) { %>
+                                <tr>
+                                    <td>
+                                        3
+                                    </td>
+                                    <td>
+                                        55.5%                                        
+                                    </td>
+                                    <td>
+                                        55.5%                                        
+                                    </td>
+                                    <td>
+                                        None                                        
+                                    </td>
+                                    <td>
+                                        2020년3월12일                                        
+                                    </td>
+                                    <td>
+                                        <button class="show">배포</button>                                        
+                                    </td>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                        <div class="nolog">
+                            <p>로그가 없습니다</p>
+                            <button>Evaluate 가이드 보기</button>
+                        </div>
+                    </div>                   
+                    <div class="desc">
+                        <div class="text">
+                            **주의 배포하기전 모델을 확인하십시오.
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <button class="evaluate">Evaluate</button>
+                        <button class="cancle">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="chart" class="">
+            <div id="wrapper">
+                <div id="container">
+                    <div class="header">
+                       History
+                    </div>
+                    <div class="body">
+                        <canvas id="canvas"></canvas>
+                    </div>                   
+                    <div class="desc">
+                        <div class="text">
+                            best_accuracy: 10 | best_loss: 10
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <button class="cancle">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="docker" class="">
+            <div id="wrapper">
+                <div id="container">
+                    <div class="header">
+                        Repository
+                    </div>
+                    <div class="body">
+                        <div>
+                            <span>URI</span><input type="text">
+                        </div>
+                        <div>
+                            <span>설명</span><input type="text" maxlength="100">
+                        </div>
+                    </div>                   
+                    <div class="desc">
+                        <div class="text">
+                            AWS ECR 주소 ( Seoul ) 와 간단한 설명을 작성하세요.
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <button class="cancle">추가</button>
+                        <button class="cancle">닫기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+</html>
